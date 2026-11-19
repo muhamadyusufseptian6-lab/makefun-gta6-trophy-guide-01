@@ -1,8 +1,8 @@
 # Leonida Platinum Tracker — GTA 6 Trophy Guide
 
-[![make.fun](https://make.fun/badge/competition/gta6-trophy-guide-01)](https://make.fun/c/gta6-trophy-guide-01)
-[![make.fun](https://make.fun/badge/entrant/muhamadyusufseptian6-lab)](https://make.fun/u/muhamadyusufseptian6-lab)
-[![make.fun](https://make.fun/badge/repo/makefun-gta6-trophy-guide-01)](https://github.com/muhamadyusufseptian6-lab/makefun-gta6-trophy-guide-01)
+[![make.fun · gta6-trophy-guide-01](https://make.fun/badge/gta6-trophy-guide-01.svg)](https://make.fun/bounty/gta6-trophy-guide-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-guide-01)
+[![rank](https://make.fun/badge/gta6-trophy-guide-01/muhamadyusufseptian6-lab/makefun-gta6-trophy-guide-01/rank.svg)](https://make.fun/bounty/gta6-trophy-guide-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-guide-01)
+[![reward](https://make.fun/badge/gta6-trophy-guide-01/muhamadyusufseptian6-lab/makefun-gta6-trophy-guide-01/reward.svg)](https://make.fun/bounty/gta6-trophy-guide-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-guide-01)
 
 An offline guide and tracker for all **55 PlayStation 5 trophies** of
 Grand Theft Auto VI (1 platinum, 2 gold, 6 silver, 46 bronze — 28 hidden
@@ -13,8 +13,10 @@ the platinum, and the checklist saves your progress in the browser.
 
 ## Open it offline
 
-Serve the `app/` folder with any static file server and open
-`index.html` — no build step, no network, no account:
+Double-click `app/index.html` in a desktop browser — no build step, no
+network, no account. (Opening it straight from disk works: the app
+loads its data from classic scripts, no server needed.) Or serve the
+`app/` folder with any static file server and open `index.html`:
 
 ```sh
 cd app
@@ -24,8 +26,7 @@ python3 -m http.server 8080
 
 Everything the page loads lives under `app/` (HTML, CSS, JavaScript and
 `data/trophies.json`). It makes no network requests at run time, so it
-works with the network off. Opening the file directly from disk may fail
-to load the trophy data — use a local server as above.
+works with the network off.
 
 ## Features
 
@@ -78,11 +79,9 @@ deliberately vague are marked hidden on PSN; the rest are shown.
 
 ## Screenshots
 
-The `screenshots/` folder holds 3–4 real renders of the running app,
+The `screenshots/` folder holds 4 real renders of the running app,
 taken in a desktop browser — the checklist with a guide open, the
-roadmap, and the missable list with progress seeded. (Captured after
-the build; the folder is empty until then, and `main.ts` handles the
-missing folder gracefully.)
+roadmap, the missable list, and the spoiler setting at work.
 
 ## License
 
