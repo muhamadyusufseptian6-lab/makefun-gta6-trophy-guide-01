@@ -74,6 +74,7 @@ deliberately vague are marked hidden on PSN; the rest are shown.
 - `app/js/roadmap.js` — the six roadmap stages and their trophy lists.
 - `app/js/views.js` — renders the checklist rows, the detail pane and the roadmap.
 - `app/data/trophies.json` — the 55 trophies with official data and our guides.
+- `app/data/trophies-data.js` — the same 55 trophies as a classic script (data for file://, generated from trophies.json).
 - `main.ts` — the entry program: copies `app/` and `screenshots/` to the
   output directory and writes `dossier.json` (Node 22, stdlib only).
 
