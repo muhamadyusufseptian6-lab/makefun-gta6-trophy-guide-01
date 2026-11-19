@@ -1,20 +1,21 @@
 // app.js — boot and wiring for the Leonida Platinum Tracker.
-// The trophy data arrives as a static JSON module import — a file under
-// app/, loaded by the module loader, never fetched over the network —
-// then this file wires the checklist, the filters, the spoiler setting,
+// Classic script (no ES modules): index.html loads the other scripts
+// with plain <script> tags first, so their top-level declarations are
+// globals this file can use directly. The trophy data arrives as
+// window.TROPHY_DATA from data/trophies-data.js — a file under app/,
+// loaded by a plain script tag, never fetched over the network — then
+// this file wires the checklist, the filters, the spoiler setting,
 // the views, and progress export/import.
 
-import TROPHY_DATA from "./data/trophies.json" with { type: "json" };
-import {
-  loadEarned,
-  saveEarned,
-  loadSettings,
-  saveSettings,
-  downloadExport,
-  parseImportDocument,
-} from "./js/store.js";
-import { filterTrophies, countByGrade, progressSummary } from "./js/filters.js";
-import { renderTrophyList, renderDetail, renderRoadmap } from "./js/views.js";
+// Trophy data, loaded by data/trophies-data.js before this script.
+// Fail loudly (instead of rendering an empty page) if it did not load.
+const TROPHY_DATA = window.TROPHY_DATA;
+if (!Array.isArray(TROPHY_DATA)) {
+  throw new Error(
+    "GTA 6 Trophy Guide: trophy data failed to load — window.TROPHY_DATA is missing. " +
+    "Check that data/trophies-data.js is present and loaded before app.js.",
+  );
+}
 
 const state = {
   trophies: [],
@@ -213,7 +214,7 @@ function wireSaveBar() {
   });
 }
 
-// Boot: read the trophy data from the static JSON import, then render.
+// Boot: read the trophy data from window.TROPHY_DATA, then render.
 // No fetch, no network: the data is one of the app's own files.
 function boot() {
   const data = TROPHY_DATA;

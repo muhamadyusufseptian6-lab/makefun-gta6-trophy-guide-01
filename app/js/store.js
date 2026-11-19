@@ -1,12 +1,12 @@
 // store.js — saved trophy progress: localStorage persistence plus
 // export-to-file and import-from-file. No network, no cookies.
 
-export const STORAGE_KEY = "gta6-trophy-guide-progress-v1";
-export const SETTINGS_KEY = "gta6-trophy-guide-settings-v1";
+const STORAGE_KEY = "gta6-trophy-guide-progress-v1";
+const SETTINGS_KEY = "gta6-trophy-guide-settings-v1";
 
 // Load the set of earned trophy ids from localStorage.
 // Returns a Set of numbers; corrupt or missing data yields an empty set.
-export function loadEarned() {
+function loadEarned() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return new Set();
@@ -20,7 +20,7 @@ export function loadEarned() {
 }
 
 // Persist the earned set. Returns true when the write worked.
-export function saveEarned(earnedSet) {
+function saveEarned(earnedSet) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify([...earnedSet].sort((a, b) => a - b)));
     return true;
@@ -30,7 +30,7 @@ export function saveEarned(earnedSet) {
 }
 
 // Load UI settings (spoiler mode, hide-earned) from localStorage.
-export function loadSettings() {
+function loadSettings() {
   try {
     const raw = localStorage.getItem(SETTINGS_KEY);
     if (!raw) return { spoiler: false, hideEarned: false };
@@ -45,7 +45,7 @@ export function loadSettings() {
 }
 
 // Persist UI settings. Returns true when the write worked.
-export function saveSettings(settings) {
+function saveSettings(settings) {
   try {
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
     return true;
@@ -56,7 +56,7 @@ export function saveSettings(settings) {
 
 // Build the export document for a download: versioned, so imports can
 // be checked before they touch the saved state.
-export function buildExportDocument(earnedSet, settings) {
+function buildExportDocument(earnedSet, settings) {
   return {
     app: "gta6-trophy-guide-01",
     version: 1,
@@ -67,7 +67,7 @@ export function buildExportDocument(earnedSet, settings) {
 }
 
 // Download the export document as a JSON file (browser-side only).
-export function downloadExport(earnedSet, settings) {
+function downloadExport(earnedSet, settings) {
   const doc = buildExportDocument(earnedSet, settings);
   const text = JSON.stringify(doc, null, 2);
   const blob = new Blob([text], { type: "application/json" });
@@ -84,7 +84,7 @@ export function downloadExport(earnedSet, settings) {
 
 // Parse an imported file's text. Returns { earned, settings } on success,
 // or { error } with a human-readable reason on failure. Never throws.
-export function parseImportDocument(text, knownIds) {
+function parseImportDocument(text, knownIds) {
   let parsed;
   try {
     parsed = JSON.parse(text);

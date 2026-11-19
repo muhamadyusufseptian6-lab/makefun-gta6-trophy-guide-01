@@ -2,7 +2,7 @@
 // official trophy descriptions. Each stage names the trophies it covers
 // and the order to earn them in; stage 6 closes with 100% and the platinum.
 
-export const ROADMAP_STAGES = [
+const ROADMAP_STAGES = [
   {
     stage: 1,
     title: "Play the story",
@@ -48,17 +48,17 @@ export const ROADMAP_STAGES = [
 ];
 
 // Look up a stage record by its number. Returns null for an unknown stage.
-export function stageForNumber(stageNumber) {
+function stageForNumber(stageNumber) {
   return ROADMAP_STAGES.find((s) => s.stage === stageNumber) || null;
 }
 
 // The stage a trophy belongs to, from its roadmap_stage field.
-export function stageOfTrophy(trophy) {
+function stageOfTrophy(trophy) {
   return stageForNumber(trophy.roadmap_stage);
 }
 
 // Trophies of one stage, in official id order, with earned flags attached.
-export function stageTrophies(stage, trophiesById, earned) {
+function stageTrophies(stage, trophiesById, earned) {
   return stage.trophyIds
     .map((id) => trophiesById.get(id))
     .filter((t) => t !== undefined)
@@ -66,7 +66,7 @@ export function stageTrophies(stage, trophiesById, earned) {
 }
 
 // How far a stage is: earned count and total.
-export function stageProgress(stage, earned) {
+function stageProgress(stage, earned) {
   const done = stage.trophyIds.filter((id) => earned.has(id)).length;
   return { done, total: stage.trophyIds.length };
 }

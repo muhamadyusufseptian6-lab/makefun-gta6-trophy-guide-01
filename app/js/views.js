@@ -2,8 +2,6 @@
 // roadmap stages and the missable-trophy list. All text from the data
 // file is inserted with textContent, never as HTML.
 
-import { isSpoilerMasked } from "./filters.js";
-import { ROADMAP_STAGES, stageTrophies, stageProgress } from "./roadmap.js";
 
 const GRADE_LABELS = {
   platinum: "Platinum",
@@ -27,7 +25,7 @@ function el(tag, className, text) {
 }
 
 // One checklist row: checkbox, medal, name, description, tags, guide button.
-export function renderTrophyRow(trophy, earned, settings, onToggle, onSelect, selectedId) {
+function renderTrophyRow(trophy, earned, settings, onToggle, onSelect, selectedId) {
   const masked = isSpoilerMasked(trophy, settings, earned);
   const isEarned = earned.has(trophy.id);
 
@@ -79,7 +77,7 @@ export function renderTrophyRow(trophy, earned, settings, onToggle, onSelect, se
 }
 
 // Render a list of trophies into a <ul>. Shows an empty note when none match.
-export function renderTrophyList(listEl, trophies, earned, settings, onToggle, onSelect, selectedId) {
+function renderTrophyList(listEl, trophies, earned, settings, onToggle, onSelect, selectedId) {
   listEl.innerHTML = "";
   if (trophies.length === 0) {
     const note = el("li", "empty-note", "No trophies match these filters. Try clearing the search or a filter.");
@@ -92,7 +90,7 @@ export function renderTrophyList(listEl, trophies, earned, settings, onToggle, o
 }
 
 // The detail pane: official facts, guide text and cited sources.
-export function renderDetail(detailCard, detailEmpty, trophy, earned, settings, onToggle) {
+function renderDetail(detailCard, detailEmpty, trophy, earned, settings, onToggle) {
   if (!trophy) {
     detailCard.hidden = true;
     detailEmpty.hidden = false;
@@ -152,7 +150,7 @@ export function renderDetail(detailCard, detailEmpty, trophy, earned, settings, 
 }
 
 // The roadmap view: six stages with their trophies and progress.
-export function renderRoadmap(roadmapEl, trophiesById, earned) {
+function renderRoadmap(roadmapEl, trophiesById, earned) {
   roadmapEl.innerHTML = "";
   for (const stage of ROADMAP_STAGES) {
     const item = el("li", "roadmap-stage");
